@@ -13,7 +13,9 @@ class Advertisement(models.Model): # это класс-модель
     auction = models.BooleanField("торг", default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-       
+    class Meta:
+        db_table = "advertisement"
+
     def __str__(self):
-        return f"title: {self.title}, text: {self.text}"
+        return f'<Advertisement: Advertisement(id={self.id}, title={self.title}, price={self.price})>'
         
