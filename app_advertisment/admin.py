@@ -11,6 +11,7 @@ class AdvertisementAdmin(admin.ModelAdmin):
     def delete_description(self, request, queryset):
         queryset.update(text='')
 
+    # noinspection PyMissingOrEmptyDocstring
     @admin.action(description="Включить возможность торга")
     def make_auction_as_true(self, request, queryset):
         queryset.update(auction=True)
