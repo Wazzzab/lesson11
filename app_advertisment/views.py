@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Advertisement
+from .forms import AdvertisementForm
 
 
 # Create your views here.
@@ -15,7 +16,16 @@ def top_sellers(request):
 
 
 def advertisement_post(request):
-    return render(request, 'advertisement-post.html')
+    if request.method == "POST":
+        form = AdvertisementForm(request.POST, request.FILES)
+        if form.is_valid():
+            adv_odject = Advertisement(**form.cleaned_data)
+            adv_odject.author = request.user
+            adv_odject.save()
+            
+    form = AdvertisementForm()
+    context = {'form': form}
+    return render(request, 'advertisement-post.html', context)
 
 
 def register(request):
